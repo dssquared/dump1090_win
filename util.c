@@ -2,6 +2,24 @@
 //
 // util.c: misc utilities
 //
+// Copyright (C) 2015  Travis Painter <travispainter@gmail.com>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// This file incorporates work covered by the following copyright and  
+// permission notices:
+//
 // Copyright (c) 2015 Oliver Jowett <oliver@mutability.co.uk>
 //
 // This file is free software: you may copy, redistribute and/or modify it  
@@ -50,7 +68,10 @@
 #include "util.h"
 
 #include <stdlib.h>
-#include <sys/time.h>
+#include "dump1090.h"
+#ifndef _WIN32
+	#include <sys/time.h>
+#endif
 
 uint64_t mstime(void)
 {

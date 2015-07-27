@@ -2,6 +2,24 @@
 //
 // net_io.c: network handling.
 //
+// Copyright (C) 2015  Travis Painter <travispainter@gmail.com>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// This file incorporates work covered by the following copyright and  
+// permission notices:
+//
 // Copyright (c) 2014,2015 Oliver Jowett <oliver@mutability.co.uk>
 //
 // This file is free software: you may copy, redistribute and/or modify it  
@@ -172,6 +190,17 @@ void serviceListen(struct net_service *service, char *bind_addr, int bind_port)
         exit(1);
     }
 
+#ifdef _WIN32
+    if ( (!Modes.wsaData.wVersion) 
+      && (!Modes.wsaData.wHighVersion) ) {
+      // Try to start the windows socket support
+      if (WSAStartup(MAKEWORD(2,1),&Modes.wsaData) != 0) 
+        {
+        fprintf(stderr, "WSAStartup returned Error\n");
+        }
+      }
+#endif
+
     s = anetTcpServer(Modes.aneterr, bind_port, bind_addr);
     if (s == ANET_ERR) {
         fprintf(stderr, "Error opening the listening port %d (%s): %s\n",
@@ -196,7 +225,9 @@ struct net_service *makeFatsvOutputService(void)
 void modesInitNet(void) {
     struct net_service *s;
 
-    signal(SIGPIPE, SIG_IGN);
+    #ifndef _WIN32
+		signal(SIGPIPE, SIG_IGN);
+	#endif
     Modes.clients = NULL;
     Modes.services = NULL;
 
@@ -273,7 +304,11 @@ static void modesCloseClient(struct client *c) {
     // client (unpredictably: reading from client A may cause client B to
     // be freed)
 
+#ifdef _WIN32
+	closesocket(c->fd);
+#else
     close(c->fd);
+#endif
     c->service->connections--;
 
     // mark it as inactive and ready to be freed
@@ -324,14 +359,14 @@ static void *prepareWrite(struct net_writer *writer, int len) {
         flushWrites(writer);
     }
 
-    return writer->data + writer->dataUsed;
+    return (char*)writer->data + writer->dataUsed;
 }
 
 // Complete a write previously begun by prepareWrite.
 // endptr should point one byte past the last byte written
 // to the buffer returned from prepareWrite.
 static void completeWrite(struct net_writer *writer, void *endptr) {
-    writer->dataUsed = endptr - writer->data;
+    writer->dataUsed = (char*)endptr - (char*)writer->data;
 
     if (writer->dataUsed >= Modes.net_output_flush_size) {
         flushWrites(writer);

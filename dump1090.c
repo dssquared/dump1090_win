@@ -2,6 +2,24 @@
 //
 // dump1090.c: main program & miscellany
 //
+// Copyright (C) 2015  Travis Painter <travispainter@gmail.com>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// This file incorporates work covered by the following copyright and  
+// permission notices:
+//
 // Copyright (c) 2014,2015 Oliver Jowett <oliver@mutability.co.uk>
 //
 // This file is free software: you may copy, redistribute and/or modify it  
@@ -551,7 +569,7 @@ void readDataFromFile(void) {
                 eof = 1;
                 break;
             }
-            r += nread;
+            (char*)r += nread;
             toread -= nread;
         }
 
@@ -611,7 +629,11 @@ void *readerThreadEntryPoint(void *arg) {
                 Modes.dev = NULL;
 
                 do {
-                    sleep(5);
+#ifndef _WIN32
+					sleep(5);
+#else
+					Sleep(5*1000);
+#endif
                     log_with_timestamp("Trying to reconnect to the RTLSDR device..");
                 } while (!Modes.exit && modesInitRTLSDR() < 0);
             }
@@ -732,6 +754,34 @@ void showHelp(void) {
 MODES_DUMP1090_VARIANT " " MODES_DUMP1090_VERSION
     );
 }
+
+#ifdef _WIN32
+void showCopyright(void) {
+    uint64_t llTime = time(NULL) + 1;
+
+    printf(
+"-----------------------------------------------------------------------------\n"
+"|                        dump1090 ModeS Receiver         Ver : " MODES_DUMP1090_VERSION " |\n"
+"-----------------------------------------------------------------------------\n"
+"\n"
+" Copyright (C) 2015 by Travis Painter <travispainter@gmail.com>\n"
+"\n"
+" All rights reserved.\n"
+"\n"
+" This program comes with ABSOLUTELY NO WARRANTY.\n"
+"\n"
+" This is free software, and you are welcome to redistribute it\n"
+" under certain conditions.\n"
+"\n"
+" For further details refer to <https://github.com/tpainter/dump1090_win>\n"
+" or the LICENSE and COPYING files.\n" 
+"\n"
+    );
+
+  // delay for 1 second to give the user a chance to read the copyright
+  while (llTime >= time(NULL)) {}
+}
+#endif
 
 static void display_total_stats(void)
 {

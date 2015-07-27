@@ -1,11 +1,17 @@
-This version of dump1090 is licensed under the GPL, v2 or later.
+This version of dump1090 is licensed under the GPL, v3 or later.
 
 Please see the individual source files and the file COPYING
 for full copyright and license details.
 
 If you need to use dump1090 in a way that is incompatible with
-the GPL, please contact Oliver Jowett <oliver@mutability.co.uk>
+the GPL, please contact Travis Painter <travispainter@gmail.com>
 to discuss your requirements.
+
+The source code incorporates worh that was released under the GPL, v2
+or later license by Oliver Jowett <oliver@mutability.co.uk>, please see:
+https://github.com/mutability/dump1090 .
+The license has been converted to GPL, v3 in order 
+to include linking to libraries licensed under the Apache License 2.0.
 
 The source code incorporates work that was released under a
 BSD-style license, reproduced below. For unmodified versions
