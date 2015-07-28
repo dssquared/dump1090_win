@@ -141,6 +141,34 @@ void showHelp(void) {
     );
 }
 
+#ifdef _WIN32
+void showCopyright(void) {
+    uint64_t llTime = time(NULL) + 1;
+
+    printf(
+"-----------------------------------------------------------------------------\n"
+"|                        view1090 ModeS Viewer         Ver : " MODES_DUMP1090_VERSION " |\n"
+"-----------------------------------------------------------------------------\n"
+"\n"
+" Copyright (C) 2015 by Travis Painter <travispainter@gmail.com>\n"
+"\n"
+" All rights reserved.\n"
+"\n"
+" This program comes with ABSOLUTELY NO WARRANTY.\n"
+"\n"
+" This is free software, and you are welcome to redistribute it\n"
+" under certain conditions.\n"
+"\n"
+" For further details refer to <https://github.com/tpainter/dump1090_win>\n"
+" or the LICENSE and COPYING files.\n" 
+"\n"
+    );
+
+  // delay for 1 second to give the user a chance to read the copyright
+  while (llTime >= time(NULL)) {}
+}
+#endif
+
 //
 //=========================================================================
 //
