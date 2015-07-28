@@ -26,13 +26,11 @@ licenses that are not compatible with the GPLv2; namely the Apache License 2.0.
 
 ## Logging
 
-The default configuration logs to `/var/log/dump1090-mutability.log` (this can be reconfigured).
-The only real logging other than any startup problems is hourly stats.
-There is a logrotate configuration installed by the package at `/etc/logrotate.d/dump1090-mutability` that will rotate that logfile weekly.
+No logging in Windows is currently configured.
 
 # Bug reports, feedback etc
 
-Please use the [github issues page](https://github.com/tpainter/dump1090-win/issues) to report any problems.
+Please use the [github issues page](https://github.com/tpainter/dump1090_win/issues) to report any problems.
 Or you can [email me](mailto:travispainter@gmail.com).
 
 # Future plans
