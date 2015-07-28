@@ -78,7 +78,7 @@ typedef int      socklen_t;
 #define M_PI 3.14159265358979323846
 #include <math.h>
 #include <pthread.h>
-#include <pthread_clock.h>
+#include <winposixclock.h>
 #include <endian.h>
 
 #ifdef __cplusplus

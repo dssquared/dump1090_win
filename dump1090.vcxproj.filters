@@ -107,9 +107,6 @@
     <ClInclude Include="util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="libpthread\pthread_clock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="endian\endian.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -117,9 +114,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="inttypes\stdint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libpthread\pthread_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="libpthread\semaphore.h">
@@ -134,6 +128,9 @@
     <ClInclude Include="pthread\pthread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="winposixclock\winposixclock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dump1090.rc">
@@ -144,20 +141,17 @@
     <Library Include="rtlsdr\rtlsdr.lib">
       <Filter>Library Files</Filter>
     </Library>
-    <Library Include="libpthread\libpthread.lib">
-      <Filter>Library Files</Filter>
-    </Library>
     <Library Include="pthread\pthreadVC2.lib">
       <Filter>Library Files</Filter>
     </Library>
     <Library Include="rtlsdr\rtlsdr_static.lib">
       <Filter>Library Files</Filter>
     </Library>
+    <Library Include="winposixclock\winposixclock.lib">
+      <Filter>Library Files</Filter>
+    </Library>
   </ItemGroup>
   <ItemGroup>
-    <None Include="libpthread\libpthread.dll">
-      <Filter>Library Files</Filter>
-    </None>
     <None Include="rtlsdr\rtlsdr.dll">
       <Filter>Library Files</Filter>
     </None>

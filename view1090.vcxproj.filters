@@ -68,9 +68,6 @@
     <ClInclude Include="pthread\pthread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="libpthread\pthread_clock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="endian\endian.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -98,6 +95,9 @@
     <ClInclude Include="util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="winposixclock\winposixclock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="rtlsdr\rtlsdr.lib">
@@ -106,7 +106,7 @@
     <Library Include="pthread\pthreadVC2.lib">
       <Filter>Library Files</Filter>
     </Library>
-    <Library Include="libpthread\libpthread.lib">
+    <Library Include="winposixclock\winposixclock.lib">
       <Filter>Library Files</Filter>
     </Library>
   </ItemGroup>
