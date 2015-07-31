@@ -38,7 +38,7 @@
 #include "dump1090.h"
 
 // hash table size, must be a power of two:
-#define ICAO_FILTER_SIZE 8192
+#define ICAO_FILTER_SIZE 4096
 
 // Millis between filter expiry flips:
 #define MODES_ICAO_FILTER_TTL 60000
@@ -162,15 +162,11 @@ uint32_t icaoFilterTestFuzzy(uint32_t partial)
     return 0;
 }
 
-uint64_t next_flip = 1;
-// call this periodically:
 void icaoFilterExpire()
 {
-    //static uint64_t next_flip = 0;
+    static uint64_t next_flip = 0;
     uint64_t now = mstime();
-	//fprintf(stderr, "now:%d  next:%d diff:%d\n", now, next_flip, next_flip-now);
     if (now >= next_flip) {
-		fprintf(stderr, "greater\n");
         if (icao_filter_active == icao_filter_a) {
             memset(icao_filter_b, 0, sizeof(icao_filter_b));
             icao_filter_active = icao_filter_b;
@@ -180,5 +176,4 @@ void icaoFilterExpire()
         }
         next_flip = now + MODES_ICAO_FILTER_TTL;
     }
-	fprintf(stderr, "now:%d  next:%d diff:%d\n", now, next_flip, next_flip-now);
 }
