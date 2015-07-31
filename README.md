@@ -1,6 +1,6 @@
 # dump1090-win Windows package
 
-This is a fork of Oliver Jowett's version of dump1090 (dump1090-mutability
+This is a fork of Oliver Jowett's version of dump1090 (dump1090-mutability)
 and is designed to be built as a Windows package. It does not
 add any new functionality. It serves solely as fork to track the developement
 of dump1090-mutability and provide similar features for Windows users.
