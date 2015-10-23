@@ -757,7 +757,7 @@ MODES_DUMP1090_VARIANT " " MODES_DUMP1090_VERSION
 
 #ifdef _WIN32
 void showCopyright(void) {
-    uint64_t llTime = time(NULL) + 1;
+    time_t llTime = time(NULL) + 1;
 
     printf(
 "-----------------------------------------------------------------------------\n"
